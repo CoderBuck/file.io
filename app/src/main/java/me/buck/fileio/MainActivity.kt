@@ -24,27 +24,31 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val rootDir = Environment.getExternalStorageDirectory()
-        filePath = rootDir.absolutePath + "/AndTools/微信.apk"
+        filePath = rootDir.absolutePath + "/AndTools/123.png"
 
         btn = findViewById(R.id.btn)
-        btn.setOnClickListener { upload() }
+        btn.setOnClickListener {
+            println("click")
+            upload() }
     }
 
     fun upload() {
         val retrofit = Retrofit.Builder()
-            .baseUrl(FileIoApiKt.BASE_URL)
+            .baseUrl(FileIoApi.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        val fileIoApi = retrofit.create(FileIoApiKt::class.java)
+        val fileIoApi = retrofit.create(FileIoApi::class.java)
 
         val file = File(filePath)
         if (!file.exists()) {
             println("文件不存在")
         }
+        println(file.length())
+
 
         val fileRQ = RequestBody.create(MediaType.parse("file/*"), file)
-        val part = MultipartBody.Part.createFormData("file", "wx.apk", fileRQ)
+        val part = MultipartBody.Part.createFormData("file", "123.png", fileRQ)
 
         val uploadCall = fileIoApi.upload(part)
         uploadCall.enqueue(object : Callback<FileIoRsp> {
@@ -53,13 +57,10 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call<FileIoRsp>, response: Response<FileIoRsp>) {
+                println("onResponse")
                 val body = response.body()
                 println(body)
             }
         })
-
-
-
-//        fileIoApi.upload()
     }
 }

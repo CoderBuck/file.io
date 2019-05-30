@@ -9,10 +9,10 @@ import retrofit2.http.Part
 /**
  * Created by gwf on 2019/5/30
  */
-interface FileIoApiKt {
+interface FileIoApi {
 
     companion object {
-        val BASE_URL = "https://file.io/"
+        const val BASE_URL = "https://file.io/"
     }
 
     @Multipart
