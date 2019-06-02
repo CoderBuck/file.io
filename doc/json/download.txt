@@ -1,0 +1,4 @@
+MainActivity$download: downloadCall : onResponse
+MainActivity$download: Response{protocol=h2, code=200, message=, url=https://file.io/V1jCqS}
+MainActivity$download: downloadCall : onResponse
+MainActivity$download: Response{protocol=h2, code=404, message=, url=https://file.io/V1jCqS}
